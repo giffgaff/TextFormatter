@@ -110,24 +110,6 @@ function preview(text, target)
 	var resultFragment = xslt.transformToFragment(parse(text).replace(/<[eis]>[^<]*<\/[eis]>/g, ''), targetDoc),
 		lastUpdated    = target;
 
-	// https://bugs.chromium.org/p/chromium/issues/detail?id=266305
-	if (typeof window !== 'undefined' && 'chrome' in window)
-	{
-		resultFragment.querySelectorAll('script').forEach(
-			function (oldScript)
-			{
-				var newScript = document.createElement('script');
-				for (var attribute of oldScript['attributes'])
-				{
-					newScript['setAttribute'](attribute.name, attribute.value);
-				}
-				newScript.textContent = oldScript.textContent;
-
-				oldScript.parentNode.replaceChild(newScript, oldScript);
-			}
-		);
-	}
-
 	// Compute and refresh hashes
 	if (HINT.hash)
 	{
