@@ -116,8 +116,8 @@ function preview(text, target)
 		resultFragment.querySelectorAll('script').forEach(
 			function (oldScript)
 			{
-				let newScript = document.createElement('script');
-				for (let attribute of oldScript['attributes'])
+				var newScript = document.createElement('script');
+				for (var attribute of oldScript['attributes'])
 				{
 					newScript['setAttribute'](attribute.name, attribute.value);
 				}
@@ -333,7 +333,7 @@ function preview(text, target)
 			// Hashes can never match if there are no hashes in any template
 			return false;
 		}
-		const attrName = 'data-s9e-livepreview-hash';
+		var attrName = 'data-s9e-livepreview-hash';
 
 		return oldEl['hasAttribute'](attrName) && newEl['hasAttribute'](attrName) && oldEl['getAttribute'](attrName) === newEl['getAttribute'](attrName);
 	}
